@@ -198,7 +198,7 @@ void search(const fs::path& dir, const std::string& keyword)
 
     while (it != end) 
     {
-        const auto current_path = it->path();  // store path before incrementing
+        const auto current_path = it->path();  
 
         if (current_path.filename().string().find(keyword) != std::string::npos) 
         {
@@ -209,7 +209,7 @@ void search(const fs::path& dir, const std::string& keyword)
         if (ec) 
         {
             std::cerr << "Skipped: " << ec.message() << " at " << current_path << '\n';
-            ec.clear(); // clear error so loop can continue
+            ec.clear();
         }
     }
 }
@@ -223,7 +223,7 @@ uintmax_t getDiskUsage(const fs::path& dir)
         {
             std::cerr << "Invalid directory.\n";
             return 0;
-        }
+        }//m
         for (const auto& entry : fs::recursive_directory_iterator(dir, fs::directory_options::skip_permission_denied)) {
             try {
                 if (fs::is_regular_file(entry.status()))
