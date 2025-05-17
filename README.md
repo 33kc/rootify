@@ -5,6 +5,6 @@ a project that im still working on <br><br><br>
 file organizer | (Description)[#description] | (Documentation)[#documentation]
 
 
-# Description 
+## Description 
 
-# Documentation
+## Documentation
