@@ -1,10 +1,10 @@
-a project that im still working on <br><br><br>
+# rootify
 
-# rootify 
+file organizer | [Description](#description) | [Documentation](#documentation)
 
-file organizer | (Description)[#description] | (Documentation)[#documentation]
-
-
-## Description 
+## Description
+desc
 
 ## Documentation
+
+doc
