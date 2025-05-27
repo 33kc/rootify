@@ -259,47 +259,55 @@ void printReadableSize(uintmax_t size)
 
 int main(int argc, char* argv[])
 {
-    if(argc < 2) 
+    if (argc < 2)
     {
-        help();
+        std::cout << "No command provided. Use 'help' or '-h' for usage.\n";
         return 1;
     }
-    
-    string command = argv[1];
+    std::string command = argv[1];
+    std::unordered_map<std::string, std::string> cmdMap =
+    {
+        {"help", "help"}, {"-h", "help"},
+        {"rename", "rename"}, {"-r", "rename"},
+        {"makedir", "makedir"}, {"-m", "makedir"},
+        {"fileinfo", "fileinfo"}, {"-i", "fileinfo"},
+        {"delete", "delete"}, {"-d", "delete"},
+        {"listdir", "listdir"}, {"-l", "listdir"},
+        {"search", "search"}, {"-s", "search"},
+        {"diskusage", "diskusage"}, {"-u", "diskusage"}
+    };
 
-    if (command == "help")
+    if (cmdMap.find(command) == cmdMap.end())
     {
+        std::cout << "Unknown command. Use 'help' or '-h' for usage.\n";
+        return 1;
+    }
+
+    std::string cmd = cmdMap[command];
+
+    if (cmd == "help")
         help();
-    }
-    else if (command == "rename")
-    {
+    else if (cmd == "rename" && argc >= 4)
         rename(fs::path(argv[2]), fs::path(argv[3]));
-    }
-    else if (command == "makedir")
-    {
+    else if (cmd == "makedir" && argc >= 3)
         makedir(fs::path(argv[2]));
-    }
-    else if (command == "fileinfo")
-    {
+    else if (cmd == "fileinfo" && argc >= 3)
         fileInfo(fs::path(argv[2]));
-    }
-    else if (command == "delete")
-    {
+    else if (cmd == "delete" && argc >= 3)
         deleteFile(argv[2]);
-    }
-    else if (command == "listdir")
-    {
+    else if (cmd == "listdir" && argc >= 3)
         listDir(argv[2]);
-    }
-    else if (command == "search")
-    {
+    else if (cmd == "search" && argc >= 4)
         search(argv[2], argv[3]);
-    }
-    else if (command == "diskusage")
+    else if (cmd == "diskusage" && argc >= 3)
     {
         uintmax_t size = getDiskUsage(fs::path(argv[2]));
         std::cout << "Disk usage of " << argv[2] << ": ";
         printReadableSize(size);
     }
+    else
+        std::cout << "Invalid or missing arguments. Use 'help' or '-h' for usage.\n";
 
+    return 0;
 }
+
